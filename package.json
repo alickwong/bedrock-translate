@@ -1,6 +1,6 @@
 {
   "name": "bedrock-translate",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "bin": {
     "bedrock-translate": "./dist/cli.js",
     "brt": "./dist/cli.js"
