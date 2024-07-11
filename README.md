@@ -13,7 +13,8 @@ npx bedrock-translate --file ../content/sms-v2-components/all-together/index.en.
 npx bedrock-translate --file ../content/sms-v2-components/all-together/index.en.md -l spanish -lc es
 ```
 
-About the extra prompt, you may add like this, if helps you to translate special terms. Just save these prompt save a txt file and use `-p` to use it
+### Translate with extra prompt
+You may add like this, if helps you to translate special terms. Just save these prompt save a txt file and use `-p` to use it
 ```
     - "support case" should be translate to "支持工单"
     - "origination identity" should be translate to "来源身份"
