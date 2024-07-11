@@ -8,14 +8,16 @@ export class Translation {
   private bedrock: BedRock;
   private languageCode: string;
   private targetLanguage: string;
+  private extraPrompt: string;
 
-  constructor(languageCode: string = 'zh', targetLanguage: string = 'simplified chinese') {
+  constructor(languageCode: string = 'zh', targetLanguage: string = 'simplified chinese', extraPrompt: string = '') {
     this.bedrock = new BedRock();
     this.languageCode = languageCode;
     this.targetLanguage = targetLanguage;
+    this.extraPrompt = extraPrompt;
   }
 
-  getPrompt(chunk: string) {
+  getPrompt(chunk: string, extraPrompt: string = '') {
     // console.log('prompt', chunk);
     // If add two \n in this code `${chunk}\nAssistant:`, all result will have one more line
     const prompt = `\n\nHuman: 
@@ -27,11 +29,12 @@ export class Translation {
     - Do not add extra information, such as extra titles, only need to translate
     - Please keep the format of markdown, do not remove padding space or tabs
     - Do not translate the text inside \`\` symbol
-    - "support case" should be translate to "支持工单"
-    - "origination identity" should be translate to "来源身份"
+    ${extraPrompt}
     - should use "，" instead of ",", "：" instead of ","
     - if you know it is a bolded text, do not add space inside "**", please add a space after "**" in markdown
     Here is the text need to be translated:<text>${chunk}</text>\nAssistant:`;
+
+    console.log(prompt);
 
 
     // - Here is the previous translation <previousTranslation>${previousTranslation}</previousTranslation>, if there is no information changed, try to keep the text same as previous translation
@@ -39,7 +42,7 @@ export class Translation {
     return prompt;
   }
 
-  getPromptForTitle(chunk: string) {
+  getPromptForTitle(chunk: string, extraPrompt: string = '') {
     // console.log('prompt', chunk);
     // If add two \n in this code `${chunk}\nAssistant:`, all result will have one more line
     const prompt = `\n\nHuman: 
@@ -53,6 +56,7 @@ export class Translation {
     - Ensuring a formal tone and using industry-specific terms
     - Do not add extra information, such as extra titles, only need to translate
     - Please keep the format of markdown, do not remove padding space or tabs
+    ${extraPrompt}
     Here is the text need to be translated:<text>${chunk}</text>\nAssistant:`;
 
 
@@ -74,9 +78,9 @@ export class Translation {
     const remainingText = lines.slice(4).join('\n');
 
 
-    let promptForTitle = this.getPromptForTitle(lines.slice(0, 4).join('\n'));
+    let promptForTitle = this.getPromptForTitle(lines.slice(0, 4).join('\n'), this.extraPrompt);
     let translatedTitle = await this.bedrock.bedrockStreamingApi(promptForTitle, ModelId.claude3Haiku);
-    let promptForContent = this.getPrompt(remainingText);
+    let promptForContent = this.getPrompt(remainingText, this.extraPrompt);
     let translatedText = await this.bedrock.bedrockStreamingApi(promptForContent, ModelId.claude3Sonnet);
     console.log(translatedTitle, translatedText);
     if (translatedText) {

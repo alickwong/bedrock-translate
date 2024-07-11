@@ -2,6 +2,7 @@
 
 import {program} from 'commander';
 import {Translation} from "./service/Translation";
+import * as fs from "fs";
 // import { translateDirectory } from './translate';
 
 program
@@ -12,6 +13,7 @@ program
   .option('-f, --file <filePath>', 'single file translation')
   .option('-lc, --languageCode <languageCode>', 'language code for file extension')
   .option('-l, --language <language>', 'language for the prompt')
+  .option('-p, --promptFilePath <promptFilePath>', 'Extra prompt for translation')
   .action(async (options) => {
     if (!options.dir && !options.file) {
       console.error('Please provide a directory using the --dir option.');
@@ -23,16 +25,20 @@ program
       process.exit(1);
     }
 
+    let prompt = '';
+    if (options.promptFilePath) {
+      prompt += fs.readFileSync(options.promptFilePath, 'utf-8');
+    }
 
     try {
       if (options.file) {
-        let translation = new Translation(options.languageCode, options.language)
+        let translation = new Translation(options.languageCode, options.language, prompt)
         // Single File Translate
         const inputDir = options.file;
         await translation.simplifiedTranslateFile(inputDir);
         return;
       } else if (options.dir) {
-        let translation = new Translation(options.languageCode, options.language)
+        let translation = new Translation(options.languageCode, options.language, prompt)
         const inputDir = options.dir;
         await translation.translateDirectory(inputDir);
       }
