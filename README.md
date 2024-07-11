@@ -9,10 +9,20 @@ This project is created for translating markdown files, I only tested for transl
 # How to use
 ### Translate Single File
 ```
-npx bedrock-translate --file ./content/clean-up/index.en.md
+npx bedrock-translate --file ./content/clean-up/index.en.md -l spanish -lc es
+npx bedrock-translate --file ./content/clean-up/index.en.md -l simplified chinese -lc zh
 ```
 
 ### Translate Entire Directory
 ```
-npx bedrock-translate --dir ./content
+npx bedrock-translate --dir ./content -l spanish -lc es
+npx bedrock-translate --dir ./content -l spanish -l simplified chinese -lc zh
+```
+
+# Options
+```
+.option('-d, --dir <directory>', 'Directory containing files to translate')
+.option('-f, --file <filePath>', 'single file translation')
+.option('-lc, --languageCode <languageCode>', 'language code for file extension')
+.option('-l, --language <language>', 'language for the prompt')
 ```

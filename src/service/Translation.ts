@@ -6,16 +6,20 @@ import * as path from "path";
 
 export class Translation {
   private bedrock: BedRock;
+  private languageCode: string;
   private targetLanguage: string;
-  constructor() {
+
+  constructor(languageCode: string = 'zh', targetLanguage: string = 'simplified chinese') {
     this.bedrock = new BedRock();
-    this.targetLanguage = 'zh';
+    this.languageCode = languageCode;
+    this.targetLanguage = targetLanguage;
   }
-  getPrompt(chunk: string, previousTranslation: string) {
+
+  getPrompt(chunk: string) {
     // console.log('prompt', chunk);
     // If add two \n in this code `${chunk}\nAssistant:`, all result will have one more line
     const prompt = `\n\nHuman: 
-    Translate the following the text in a markdown file to simplified Chinese, Follow these requirements:
+    Translate the following the text in a markdown file to ${this.targetLanguage}, Follow these requirements:
     - For any technical terms or proper nouns, please keep them in the original English. This includes but is not limited to names of technologies, protocols, software, APIs, and technical concepts.
     - Always reply like this: "Your translation is: </translation>"
     - Do not try to change/ fix the markdown symbol.
@@ -35,11 +39,11 @@ export class Translation {
     return prompt;
   }
 
-  getPromptForTitle(chunk: string, previousTranslation: string) {
+  getPromptForTitle(chunk: string) {
     // console.log('prompt', chunk);
     // If add two \n in this code `${chunk}\nAssistant:`, all result will have one more line
     const prompt = `\n\nHuman: 
-    Translate the following the text in a markdown file to simplified Chinese, Follow these requirements:
+    Translate the following the text in a markdown file to ${this.targetLanguage}, Follow these requirements:
     - Only translate "title" and "weight" value, not "title" and "weight" itself
     - Only translate the text inside ""
     - the weight is a number, do not add "" to it
@@ -70,14 +74,14 @@ export class Translation {
     const remainingText = lines.slice(4).join('\n');
 
 
-    let promptForTitle = this.getPromptForTitle(lines.slice(0, 4).join('\n'), '');
+    let promptForTitle = this.getPromptForTitle(lines.slice(0, 4).join('\n'));
     let translatedTitle = await this.bedrock.bedrockStreamingApi(promptForTitle, ModelId.claude3Haiku);
-    let promptForContent = this.getPrompt(remainingText, '');
+    let promptForContent = this.getPrompt(remainingText);
     let translatedText = await this.bedrock.bedrockStreamingApi(promptForContent, ModelId.claude3Sonnet);
     console.log(translatedTitle, translatedText);
     if (translatedText) {
       let nameArr = path.basename(filePath).split('.');
-      const outputPath = path.join(path.dirname(filePath), nameArr[0] + '.' + this.targetLanguage + '.' + nameArr[2]);
+      const outputPath = path.join(path.dirname(filePath), nameArr[0] + '.' + this.languageCode + '.' + nameArr[2]);
       fs.writeFileSync(outputPath, translatedTitle + "\n" + translatedText);
       console.log(`Translated ${filePath}`);
     } else {

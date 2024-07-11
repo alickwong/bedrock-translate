@@ -12,7 +12,9 @@
     "test": "jest",
     "cdk": "cdk",
     "tran_cli_folder": "ts-node ./src/cli.ts --dir ../content/summary",
-    "tran_cli_file": "ts-node ./src/cli.ts --file ../content/sms-v2-components/all-together/index.en.md"
+    "tran_cli_folder_es": "ts-node ./src/cli.ts --dir ../content -l spanish -lc es",
+    "tran_cli_file": "ts-node ./src/cli.ts --file ../content/sms-v2-components/all-together/index.en.md  -l simplified chinese -lc zh",
+    "tran_cli_file_es": "ts-node ./src/cli.ts --file ../content/sms-v2-components/all-together/index.en.md -l spanish -lc es"
   },
   "devDependencies": {
     "@types/async-retry": "^1.4.8",
