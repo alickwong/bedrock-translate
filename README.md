@@ -1,4 +1,5 @@
 <div align="center">
+    
 # Bedrock Translate
 
 ![NPM Version](https://img.shields.io/npm/v/:bedrock-translate)
