@@ -6,12 +6,6 @@
 		<img src="https://github.com/alickwong/bedrock-translate/workflows/CI/badge.svg">
 	</a>
 
-[//]: # (    <a href="https://codecov.io/github/alickwong/bedrock-translate?branch=master">)
-
-[//]: # (		<img src="https://img.shields.io/codecov/c/github/alickwong/bedrock-translate.svg?maxAge=2592000">)
-
-[//]: # (	</a>	)
-
 	<a href="https://badge.fury.io/js/bedrock-translate">
 	    <img src="https://badge.fury.io/js/bedrock-translate.svg" alt="npm version" height="18">
     </a>
