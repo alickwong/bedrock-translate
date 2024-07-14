@@ -5,14 +5,15 @@
 	<a href="https://github.com/alickwong/bedrock-translate/actions?workflow=CI">
 		<img src="https://github.com/alickwong/bedrock-translate/workflows/CI/badge.svg">
 	</a>
-
 	<a href="https://badge.fury.io/js/bedrock-translate">
 	    <img src="https://badge.fury.io/js/bedrock-translate.svg" alt="npm version" height="18">
     </a>
     <a href="https://github.com/alickwong/bedrock-translate">
         <img src="https://david-dm.org/alickwong/bedrock-translate.svg" alt="npm version" height="18">
     </a>
-    [![install size](https://packagephobia.com/badge?p=bedrock-translate)](https://packagephobia.com/result?p=bedrock-translate)
+     <a href="https://packagephobia.now.sh/result?p=bedrock-translate">
+        <img src="https://packagephobia.now.sh/badge?p=bedrock-translate@latest" alt="npm version" height="18">
+    </a>
     <a href="./LICENSE">
 		<img src="https://img.shields.io/badge/license-MIT-blue.svg">
 	</a>
