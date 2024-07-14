@@ -1,22 +1,10 @@
-<h1 align="center">Bedrock Translate</h1>
-
-
 <div align="center">
-	<a href="https://github.com/alickwong/bedrock-translate/actions?workflow=CI" style="text-decoration:none">
-		<img src="https://github.com/github/docs/actions/workflows/main.yml/badge.svg">
-	</a>
-	<a href="https://badge.fury.io/js/bedrock-translate" style="text-decoration:none">
-	    <img src="https://badge.fury.io/js/bedrock-translate.svg" alt="npm version" height="18">
-    </a>
-     <a href="https://packagephobia.now.sh/result?p=bedrock-translate" style="text-decoration:none">
-        <img src="https://packagephobia.now.sh/badge?p=bedrock-translate@latest" alt="npm version" height="18">
-    </a>
-    <a href="./LICENSE" style="text-decoration:none">
-		<img src="https://img.shields.io/badge/license-MIT-blue.svg">
-	</a>
+# Bedrock Translate
 
-  <br>
-  <br>
+![NPM Version](https://img.shields.io/npm/v/:bedrock-translate)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+[![install size](https://packagephobia.com/badge?p=bedrock-translate)](https://packagephobia.com/result?p=bedrock-translate)
+
 </div>
 
 This project is created for translating markdown files, I only tested for translating AWS workshops. More features will
