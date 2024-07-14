@@ -3,7 +3,7 @@
 
 <div align="center">
 	<a href="https://github.com/alickwong/bedrock-translate/actions?workflow=CI">
-		<img src="https://github.com/alickwong/bedrock-translate/workflows/CI/badge.svg">
+		<img src="https://github.com/github/docs/actions/workflows/main.yml/badge.svg">
 	</a>
 	<a href="https://badge.fury.io/js/bedrock-translate">
 	    <img src="https://badge.fury.io/js/bedrock-translate.svg" alt="npm version" height="18">
