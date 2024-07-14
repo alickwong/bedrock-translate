@@ -2,7 +2,7 @@
     
 # Bedrock Translate
 
-![NPM Version](https://img.shields.io/npm/v/:bedrock-translate)
+[![npm version](https://badge.fury.io/js/bedrock-translate.svg)](https://badge.fury.io/js/bedrock-translate)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 [![install size](https://packagephobia.com/badge?p=bedrock-translate)](https://packagephobia.com/result?p=bedrock-translate)
 
