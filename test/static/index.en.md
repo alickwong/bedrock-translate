@@ -1,0 +1,5 @@
+---
+title: "Amazon Pinpoint SMS workshop"
+weight: 0
+---
+This workshop is for developers and technical individuals who want to add SMS sending capabilities to their applications using [Amazon Pinpoint](https://aws.amazon.com/pinpoint/). In this workshop, you will learn the basics of SMS, and get hands-on experience configuring Pinpoint to send SMS messages. This workshop contains both theory and hands-on labs that have been designed to help you get started quickly with [Amazon Pinpoint’s SMS & Voice V2 API](https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/Welcome.html).

@@ -1,2 +1,0 @@
-    - "support case" should be translate to "支持工单"
-    - "origination identity" should be translate to "来源身份"

@@ -21,4 +21,11 @@ export class FileManager {
 
     return files;
   }
+
+  addLanguageCode(fileNameWithExtension: string, languageCode: string): string {
+    // add a language code to fileNameWithExtension before the file extension
+    const parts = fileNameWithExtension.split('.');
+    parts.splice(parts.length - 1, 0, languageCode);
+    return parts.join('.');
+  }
 }

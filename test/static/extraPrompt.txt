@@ -1,0 +1,9 @@
+    - Do NOT change anything inside ":::" code block, i repeat, do NOT change any CLI or coding part
+    - if it looks like a CLI, do not translate or edit it
+    - "support case" should be translate to "支持工单"
+    - "origination identity" should be translate to "来源身份"
+    - do not translate short form such as "SMS"
+    - "event destinations" should translate to "事件目标"
+    - "workshop" should be translated to "工作坊"
+    - If it looks like a technical terms such as "Amazon Pinpoint SMS" or "Voice API v2", do not translate these terms
+    - markdown have a title format start with "---", do not change this format
