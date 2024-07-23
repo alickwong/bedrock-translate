@@ -4,13 +4,17 @@
 import {BedrockTranslate} from "../src/service/BedrockTranslate";
 import {BedRock} from "../src/service/BedRock";
 import {ModelId} from "../src/enum/ModelId";
+import {countryLanguageMapping} from "../src/service/CountryCodeMapping";
 
 jest.setTimeout(1000000000);
 
 
 
 test('Single File Translate Files', async () => {
-  let translation = new BedrockTranslate()
+  const normalizedLanguageTarget = 'es';
+  const language = countryLanguageMapping[normalizedLanguageTarget];
+  let translation = new BedrockTranslate(normalizedLanguageTarget, language);
+
   // Single File Translate
   const inputDir = '../content/sms-v2-components/all-together/index.en.md';
   await translation.simplifiedTranslateFile(inputDir);
@@ -25,7 +29,9 @@ test('Single File Translate Files with reference', async () => {
 });
 
 test('Test Extra Prompt Load', async () => {
-  let translation = new BedrockTranslate()
+  const normalizedLanguageTarget = 'zh';
+  const language = countryLanguageMapping[normalizedLanguageTarget];
+  let translation = new BedrockTranslate(normalizedLanguageTarget, language);
   translation.setReferencePath('../bedrock-translate-config/zh/reference');
   translation.setExtraPromptPath('test/static/extraPrompt.txt');
   let data = translation.getExtraPrompt();
@@ -33,10 +39,12 @@ test('Test Extra Prompt Load', async () => {
 });
 
 test('Directory Translate Files', async () => {
-  let translation = new BedrockTranslate()
-  translation.setReferencePath('../bedrock-translate-config/zh/reference');
-  translation.setExtraPromptPath('../bedrock-translate-config/zh/extraPrompt.txt');
-  const inputDir = '../content';
+  const normalizedLanguageTarget = 'zh';
+  const language = countryLanguageMapping[normalizedLanguageTarget];
+  let translation = new BedrockTranslate(normalizedLanguageTarget, language)
+  // translation.setReferencePath('../bedrock-translate-config/zh/reference');
+  // translation.setExtraPromptPath('../bedrock-translate-config/zh/extraPrompt.txt');
+  const inputDir = '../content/getting-started';
   await translation.translateDirectory(inputDir);
 });
 

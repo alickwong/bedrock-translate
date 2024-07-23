@@ -1,9 +1,9 @@
 {
-  "name": "bedrock-translate",
-  "version": "0.1.4",
+  "name": "br-translate",
+  "version": "0.1.5",
   "bin": {
-    "bedrock-translate": "./dist/src/cli.js",
-    "brt": "./dist/src/cli.js"
+    "br-translate": "./dist/cli.js",
+    "brt": "./dist/cli.js"
   },
   "main": "dist/cli.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "tran_cli_folder": "ts-node ./src/cli.ts --dir ../content/summary",
     "tran_cli_folder_es": "ts-node ./src/cli.ts --dir ../content -l spanish -lc es",
     "tran_cli_file_extra": "ts-node ./src/cli.ts --file ./test/static/referenceFiles/file3.txt -l 'simplified chinese' -lc zh -p ./test/static/extraPrompt.txt ",
-    "tran_cli_file_es": "ts-node ./src/cli.ts --file ../content/sms-v2-components/all-together/index.en.md -l spanish -lc es"
+    "tran_cli_file_es": "ts-node ./src/cli.ts --file ../content/sms-v2-components/all-together/index.en.md -l spanish -lc es",
+    "tran_cli_init": "ts-node ./src/cli.ts init --langCode es"
   },
   "devDependencies": {
     "@types/async-retry": "^1.4.8",

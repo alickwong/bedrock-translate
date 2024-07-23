@@ -1,0 +1,28 @@
+
+version: 2.0
+
+defaultLocaleCode: en-US
+localeCodes:
+  - en-US
+  - de-DE
+  - es-US
+
+awsAccountConfig:
+  accountSources:
+    - WorkshopStudio
+  regionConfiguration:
+    deployableRegions:
+      recommended:
+        - us-east-1
+        - us-east-2
+        - eu-west-1
+    minAccessibleRegions: 1
+    maxAccessibleRegions: 1
+    accessibleRegions:
+      recommended:
+        - us-east-1
+        - us-east-2
+        - eu-west-1
+  participantRole:
+    managedPolicies:
+      - "arn:aws:iam::aws:policy/AdministratorAccess"

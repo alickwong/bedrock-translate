@@ -1,6 +1,7 @@
 import {FileManager} from "./FileManager";
 import {ModelId} from "../enum/ModelId";
 import {BedRock} from "./BedRock";
+import {ContentSpecManager} from "./ContentSpecManager";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -11,11 +12,15 @@ export class BedrockTranslate {
   private extraPromptPath?: string;
   private referencePath?: string;
   private extraPrompt?: string;
+  private languageSource?: string;
+  private successfulTranslations: number = 0;
+  private contentSpecManager: ContentSpecManager;
 
-  constructor(languageCode: string = 'zh', targetLanguage: string = 'simplified chinese') {
+  constructor(targetLanguageCode: string = 'zh', targetLanguage: string = 'simplified chinese') {
     this.bedrock = new BedRock();
-    this.languageCode = languageCode;
+    this.languageCode = targetLanguageCode;
     this.targetLanguage = targetLanguage;
+    this.contentSpecManager = new ContentSpecManager(targetLanguageCode);
   }
 
   public setExtraPromptPath(extraPromptPath: string) {
@@ -38,6 +43,10 @@ export class BedrockTranslate {
     this.referencePath = referencePath;
   }
 
+  public setLanguageSource(languageSource: string) {
+    this.languageSource = languageSource;
+  }
+
   getPrompt(textToBeTranslate: string, referenceData: string = '') {
     // If add two \n in this code `${chunk}\nAssistant:`, all result will have one more line
     let prompt = `\n\nHuman: 
@@ -48,7 +57,7 @@ export class BedrockTranslate {
     }
 
     prompt += `Translate the following the text in a markdown file to ${this.targetLanguage}, Follow these requirements:
-    - For any technical terms or proper nouns, please keep them in the original English. This includes but is not limited to names of technologies, protocols, software, APIs, and technical concepts.
+    - For any technical terms or proper nouns, please keep them in English. This includes but is not limited to names of technologies, protocols, software, APIs, and technical concepts.
     - Always reply like this: "Your translation is: \n"
     - Do not try to change/ fix the markdown symbol.
     - Ensuring a formal tone and using industry-specific terms
@@ -78,7 +87,7 @@ export class BedrockTranslate {
     - Only translate "title" and "weight" value, not "title" and "weight" itself
     - Only translate the text inside ""
     - the weight is a number, do not add "" to it
-    - For any technical terms or proper nouns, please keep them in the original English. This includes but is not limited to names of technologies, protocols, software, APIs, and technical concepts.
+    - For any technical terms or proper nouns, please keep them in English. This includes but is not limited to names of technologies, protocols, software, APIs, and technical concepts.
     - Always reply like this: "Your translation is: </translation>"
     - Do not try to change/ fix the markdown symbol.
     - Ensuring a formal tone and using industry-specific terms
@@ -109,16 +118,15 @@ export class BedrockTranslate {
   }
 
   async simplifiedTranslateFile(filePath: string) {
-    console.log(`start translating ${filePath}`);
+    console.log(`Initiate translating ${filePath}`);
     let textToBeTranslate = '';
     // englishText += getNote();
     textToBeTranslate += fs.readFileSync(filePath, 'utf-8');
-    console.log('test', textToBeTranslate);
 
     // Split the englishText into an array of lines
     const lines = textToBeTranslate.split('\n');
 
-    // Sample translated text for improving translation accuracy
+    // Sample text translated for improving translation accuracy
     let referenceData = await this.getAllReferenceData();
 
     let translatedText = '';
@@ -153,6 +161,7 @@ export class BedrockTranslate {
       const outputPath = path.join(path.dirname(filePath), fileName);
       fs.writeFileSync(outputPath, translatedText);
       console.log(`Translated ${filePath}`);
+      this.successfulTranslations++;
     } else {
       console.log(`Translate failed for ${filePath}`);
     }
@@ -161,13 +170,17 @@ export class BedrockTranslate {
   async translateDirectory(inputDir: string): Promise<void> {
     let fileManager = new FileManager();
     let files = await fileManager.getAllFiles(inputDir);
+    const languageSource = this.languageSource ? this.languageSource : 'en';
     files = files.filter(x => {
       const fileName = path.basename(x);
       const extension = path.extname(fileName);
       const entensionArray = fileName.split('.');
 
-      return extension === '.md' && entensionArray[1] === 'en';
+      return extension === '.md' && entensionArray[1] === languageSource;
     })
+
+    // Checks if there is a Contentspec yaml file and updates it accordingly
+    await this.contentSpecManager.checkAndProcessContentSpec(inputDir);
 
     const batchSize = 5;
     for (let i = 0; i < files.length; i += batchSize) {
@@ -178,5 +191,9 @@ export class BedrockTranslate {
 
       await Promise.all(promises);
     }
+  }
+
+  getTranslationCount(): number {
+    return this.successfulTranslations;
   }
 }
