@@ -2,9 +2,9 @@
     
 # Bedrock Translate
 
-[![npm version](https://badge.fury.io/js/bedrock-translate.svg)](https://badge.fury.io/js/bedrock-translate)
+[![npm version](https://badge.fury.io/js/br-translate.svg)](https://badge.fury.io/js/br-translate)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
-[![install size](https://packagephobia.com/badge?p=bedrock-translate)](https://packagephobia.com/result?p=bedrock-translate)
+[![install size](https://packagephobia.com/badge?p=br-translate)](https://packagephobia.com/result?p=br-translate)
 
 </div>
 
