@@ -14,6 +14,7 @@ be added soon. Feel free to send a feature request here.
 ## 🔥 Roadmap
 - [ ] Support translating file name with different name pattern
 - [ ] Support using different LLM models
+- [ ] Support translating PPTX files
 - [x] Let llm read an article before translating for improving translation accuracy
 - [x] Fine tune the translation using few shot learning prompt
 - [x] Add support for 
